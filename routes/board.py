@@ -14,7 +14,7 @@ import uuid
 def get_boards():
     user_id = get_jwt_identity()
     boards = Board.query.filter_by(owner_id=user_id).all()
-    return jsonify([{'id': b.id, 'name': b.name, 'description': b.description} for b in boards])
+    return jsonify([{'id': b.id, 'name': b.name, 'description ': b.description} for b in boards])
 
 @board_bp.route('/create', methods=['POST'])
 @jwt_required()
