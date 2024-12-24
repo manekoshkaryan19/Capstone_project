@@ -1,0 +1,21 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+htmlcov
+# Flask
+instance/
+.webassets-cache
+# Git
+.git
+.gitignore
+# Docker
+*.log
+docker-compose.override.yml
+# Environment Variables
+.env
+# Migrations
+migrations/
+# IDEs and Editors
+.vscode/
+.idea/
