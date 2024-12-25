@@ -1,15 +1,15 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from flask import Flask
-from app import app
+from app import create_app
 from routes.section import create_section, get_sections, update_section, delete_section
 from models.section import Section
 from models.board import Board
-from models import db
+
 
 class SectionUnitTestCase(unittest.TestCase):
     def setUp(self):
-        self.app = app
+        self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
 

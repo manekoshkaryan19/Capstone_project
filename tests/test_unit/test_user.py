@@ -1,17 +1,15 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from flask import Flask
-from app import app  # your main Flask app
+from app import create_app
 from routes.auth import register, login
 from models.user import User
-from models import db
 
 
 class UserUnitTestCase(unittest.TestCase):
 
-
     def setUp(self):
-        self.app = app
+        self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
 

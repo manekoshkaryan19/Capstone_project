@@ -1,19 +1,17 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from flask import Flask
-from app import app
+from app import create_app
 from routes.ticket import create_ticket, get_tickets, update_ticket, delete_ticket
 from models.ticket import Ticket
 from models.section import Section
 from models.user import User
-from models import db
 
 
 class TicketUnitTestCase(unittest.TestCase):
 
     def setUp(self):
-        # Push app context so queries won't fail
-        self.app = app
+        self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
 
@@ -38,10 +36,7 @@ class TicketUnitTestCase(unittest.TestCase):
         mock_get_jwt,
         mock_verify_jwt
     ):
-        """
-        Test POST /create -> create_ticket().
-        Expect 201 + JSON data if name & section_id are valid.
-        """
+
         # Mock a valid section
         mock_section = MagicMock(spec=Section)
         mock_section.id = 10
@@ -86,10 +81,7 @@ class TicketUnitTestCase(unittest.TestCase):
         mock_get_jwt,
         mock_verify_jwt
     ):
-        """
-        Test GET /<int:section_id> -> get_tickets(section_id).
-        Expect 200 + JSON list if section exists.
-        """
+
         # Mock a valid section
         mock_section = MagicMock(spec=Section)
         mock_section.id = 5
@@ -138,10 +130,7 @@ class TicketUnitTestCase(unittest.TestCase):
         mock_get_jwt,
         mock_verify_jwt
     ):
-        """
-        Test PUT /<int:ticket_id> -> update_ticket(ticket_id).
-        Expect 200 + updated ticket data if ticket exists.
-        """
+
         # Mock existing ticket
         mock_ticket = MagicMock(spec=Ticket)
         mock_ticket.id = 200
@@ -208,10 +197,7 @@ class TicketUnitTestCase(unittest.TestCase):
         mock_get_jwt,
         mock_verify_jwt
     ):
-        """
-        Test DELETE /<int:ticket_id> -> delete_ticket(ticket_id).
-        Expect 200 + 'Ticket deleted'.
-        """
+
         # Mock an existing ticket
         mock_ticket = MagicMock(spec=Ticket)
         mock_ticket.id = 300

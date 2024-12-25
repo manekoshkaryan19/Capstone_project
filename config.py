@@ -9,4 +9,5 @@ class Config:
 class TestConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    JWT_SECRET_KEY = 'your_jwt_test_secret_key'
     TESTING = True

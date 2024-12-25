@@ -1,17 +1,16 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from flask import Flask
-from app import app
+from app import create_app
 from routes.board import create_board, get_boards, get_board_details
 from models.board import Board
-from models import db
 
 
 class BoardUnitTestCase(unittest.TestCase):
 
 
     def setUp(self):
-        self.app = app
+        self.app = create_app()
         self.app_context = self.app.app_context()
         self.app_context.push()
 
@@ -34,10 +33,7 @@ class BoardUnitTestCase(unittest.TestCase):
         mock_get_jwt,
         mock_verify_jwt
     ):
-        """
-        Tests POST /boards/create -> create_board().
-        We expect 201 if 'name' is provided, along with new board data in JSON.
-        """
+
         with self.app.test_request_context('/boards/create', method='POST'):
             with patch('flask.request.get_json') as mock_get_json:
                 mock_get_json.return_value = {
@@ -57,9 +53,6 @@ class BoardUnitTestCase(unittest.TestCase):
         mock_add.assert_called_once()
         mock_commit.assert_called_once()
 
-    #
-    # 2) Test GET BOARDS
-    #
     @patch('flask_jwt_extended.view_decorators.verify_jwt_in_request')
     @patch('flask_jwt_extended.utils.get_jwt', return_value={"sub": 123})
     @patch('flask_jwt_extended.utils.get_jwt_identity', return_value=123)
@@ -98,9 +91,6 @@ class BoardUnitTestCase(unittest.TestCase):
         self.assertEqual(data[0]['id'], 10)
         self.assertEqual(data[1]['name'], 'Board 11')
 
-    #
-    # 3) Test GET BOARD DETAILS
-    #
     @patch('flask_jwt_extended.view_decorators.verify_jwt_in_request')
     @patch('flask_jwt_extended.utils.get_jwt', return_value={"sub": 123})
     @patch('flask_jwt_extended.utils.get_jwt_identity', return_value=123)
