@@ -11,11 +11,26 @@ Docker Compose
 
 Setting Up the Testing Environment
 
+
 ## Clone the Repository:
 
 git clone https://github.com/manekoshkaryan19/Capstone_project.git
 
 cd capstone_project
+## Create a .env File:
+You need to create a .env file in the root directory to configure the environment variables. Below is an example of what the .env file should contain:
+
+POSTGRES_USER=postgres
+
+POSTGRES_PASSWORD=pass
+
+POSTGRES_DB=trello
+
+DATABASE_URL=postgresql://postgres:pass@localhost:5432/trello
+
+SECRET_KEY=your_secret_key
+
+JWT_SECRET_KEY=your_jwt_secret_key
 
 ## Start Docker Services:
 
@@ -37,7 +52,7 @@ Or pytest for both:
 
 pytest
 
-Test Coverage
+## Test Coverage
 
 Run Tests with Coverage:
 
@@ -47,7 +62,7 @@ Generate Coverage Report:
 
 coverage report
 
-# Without Docker
+# Work without Docker
 
 Clone the Repository:
 
@@ -61,18 +76,6 @@ Install Dependencies:
 
 pip install -r requirements.txt
 
-## Configuration
-
-Environment Variables:
-Create a .env file in the root directory and add the following configurations:
-
-SECRET_KEY=your_secret_key
-
-JWT_SECRET_KEY=your_jwt_secret_key
-
-DATABASE_URL=postgresql+psycopg2://username:password@localhost:5432/your_database
-
-Ensure to replace the placeholders with your values
 
 ## Database Setup:
 
