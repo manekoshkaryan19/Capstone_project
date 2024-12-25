@@ -18,11 +18,12 @@ git clone https://github.com/manekoshkaryan19/Capstone_project.git
 cd capstone_project
 
 ## Start Docker Services:
-
-docker-compose build --no-cache
+```
+docker-compose build 
 
 docker-compose up -d
 
+```
 ## Running Tests
 
 Unit Tests

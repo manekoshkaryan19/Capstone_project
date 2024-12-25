@@ -6,9 +6,11 @@ from config import Config, TestConfig
 from models import db
 from routes import auth_bp, board_bp, section_bp, ticket_bp
 from flask_migrate import Migrate
+from flask_cors import CORS
 from models import User, Board, Section, Ticket
 
 def create_app(config_class=Config):
+
     app = Flask(__name__, static_folder="static")
     app.config.from_object(config_class)
 
@@ -29,7 +31,10 @@ def create_app(config_class=Config):
     def index():
         return jsonify({"message": "Welcome to the Capstone Application!"}), 200
 
+    CORS(app, resources={r"/*": {"origins": "*"}})
     return app
+
+app = create_app()
 
 if __name__ == '__main__':
     # Create app instance with default Config

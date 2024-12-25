@@ -11,18 +11,17 @@ services:
       - .env
     environment:
       - FLASK_ENV=production
-      - DATABASE_URL=postgresql://postgres:1904@localhost:5434/trello1
-      - SECRET_KEY=${SECRET_KEY}
-      # Add other environment variables as needed
+      - DATABASE_URL=postgresql://postgres:1904@localhost:5432/trello1
+      - SECRET_KEY=your_secret_key
     depends_on:
       - db
 
   db:
-    image: postgres:14
+    image: postgres:13
     container_name: capstone_db
     restart: always
     ports:
-      - "5432:5432"
+      - "5435:5432"
     env_file:
       - .env
     environment:
